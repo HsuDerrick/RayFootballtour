@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>足球少年 - 成長雜誌專刊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Noto+Sans+TC:wght@300;400;700;900&family=Playfair+Display:ital,wght@1,700&display=swap');
+        
+        :root {
+            --accent-blue: #3b82f6;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #020617;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .heading-font {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .serif-italic {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        /* 英雄區進場動畫 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(1.1); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* 網格區塊效果 - Bento Grid */
+        .bento-item {
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .bento-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .bento-item img {
+            transition: all 0.8s ease;
+            filter: saturate(0.8);
+        }
+
+        .bento-item:hover img {
+            transform: scale(1.08);
+            filter: saturate(1.1) brightness(0.7);
+        }
+
+        /* 文字遮罩 */
+        .content-overlay {
+            background: linear-gradient(to top, rgba(2, 6, 23, 0.9) 0%, rgba(2, 6, 23, 0) 100%);
+            opacity: 1;
+        }
+
+        /* 雜誌感浮水印背景 */
+        .bg-text {
+            position: fixed;
+            font-size: 25vw;
+            line-height: 1;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.015);
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-5deg);
+            white-space: nowrap;
+            pointer-events: none;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        /* 自定義捲軸 */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+
+        /* 英雄區背景效果 */
+        .hero-gradient {
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="bg-text text-white">DREAMER</div>
+
+    <!-- 全螢幕英雄首頁區 -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1551952237-954a0e68786c?auto=format&fit=crop&w=1920&q=80" 
+                 class="w-full h-full object-cover opacity-30 animate-scale-in" alt="背景球場">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#020617] via-transparent to-[#020617]"></div>
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl w-full text-center md:text-left flex flex-col items-center md:items-start">
+            <div class="animate-fade-up" style="animation-delay: 0.2s">
+                <span class="text-blue-500 font-bold tracking-[0.5em] text-xs uppercase mb-6 block">The Digital Archive / 2021 - 2024</span>
+                <h1 class="heading-font text-[15vw] md:text-[12rem] tracking-tighter leading-[0.8] mb-8 font-black">
+                    UNSTOPPABLE<br><span class="text-white drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]">FORCE.</span>
+                </h1>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center md:items-end gap-12 mt-8 animate-fade-up" style="animation-delay: 0.5s">
+                <div class="max-w-md">
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        這不只是一個關於足球的故事，而是一個孩子學會勇敢、堅持與夢想的過程。從幼稚園的蹣跚學步，到球場上的閃耀瞬間。
+                    </p>
+                    <div class="flex gap-4 justify-center md:justify-start">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-blue-900/40">
+                            立即探索專刊
+                        </button>
+                        <button class="border border-white/20 hover:bg-white hover:text-black text-white font-bold py-4 px-10 rounded-full transition-all">
+                            關於球員
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex gap-16 border-l border-white/10 pl-12 hidden lg:flex">
+                    <div>
+                        <span class="block text-gray-500 text-[10px] uppercase tracking-widest mb-2">Age</span>
+                        <span class="text-4xl font-black heading-font">08</span>
+                    </div>
+                    <div>
+                        <span class="block text-gray-500 text-[10px] uppercase tracking-widest mb-2">Goals</span>
+                        <span class="text-4xl font-black heading-font text-blue-500">22+</span>
+                    </div>
+                    <div>
+                        <span class="block text-gray-500 text-[10px] uppercase tracking-widest mb-2">Position</span>
+                        <span class="text-4xl font-black heading-font uppercase italic">Striker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+            <i class="fas fa-chevron-down text-2xl text-white"></i>
+        </div>
+    </section>
+
+    <!-- 頂部導覽 (當滑動後顯示的簡易標題) -->
+    <header class="max-w-7xl mx-auto py-16 px-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+        <div class="relative">
+            <h1 class="heading-font text-7xl md:text-[8rem] tracking-tighter leading-[0.8] mb-2">
+                BEYOND<br><span class="text-blue-600">LIMITS.</span>
+            </h1>
+            <p class="text-gray-500 font-light tracking-[0.2em] uppercase text-sm mt-4">成長專刊：記錄每一個進球瞬間</p>
+        </div>
+        <div class="flex flex-col md:items-end">
+            <div class="text-right mb-4">
+                <span class="text-xs text-gray-500 uppercase block">Athlete Profile</span>
+                <h2 class="text-3xl font-black text-white">[兒子名字]</h2>
+                <p class="text-blue-500 font-medium tracking-widest">STRIKER / NO. 10</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- 雜誌網格 (Bento Grid Layout) -->
+    <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 md:grid-rows-6 gap-6 h-auto md:h-[1600px] px-6">
+        
+        <!-- 主打區：當下的熱血 (大圖) -->
+        <div class="bento-item md:col-span-8 md:row-span-3 bg-gray-900 group">
+            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1600&q=80" alt="比賽大圖" class="w-full h-full object-cover">
+            <div class="absolute inset-0 content-overlay flex flex-col justify-end p-8 md:p-12">
+                <span class="text-blue-500 font-bold mb-2 tracking-widest text-sm uppercase">Headline Story</span>
+                <h3 class="text-4xl md:text-6xl font-black mb-4 italic heading-font leading-tight">球場上的小巨人：<br>小二聯賽精彩回顧</h3>
+                <p class="max-w-xl text-gray-300 text-lg leading-relaxed hidden md:block">
+                    在那個充滿汗水的午後，他第一次感受到了比賽的重量。每一次盤球、每一次傳球，都寫著這兩年來的進步與不放棄。
+                </p>
+            </div>
+            <div class="absolute top-8 right-8 bg-white text-black px-4 py-2 rounded-full font-black text-xs">
+                FEATURED
+            </div>
+        </div>
+
+        <!-- 幼稚園區：回首起點 (小圖) -->
+        <div class="bento-item md:col-span-4 md:row-span-2 bg-slate-800">
+            <img src="https://images.unsplash.com/photo-1510566337590-2fc1f21d0faa?auto=format&fit=crop&w=800&q=80" alt="幼稚園" class="w-full h-full object-cover grayscale brightness-75">
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-black/40">
+                <span class="serif-italic text-blue-400 text-xl mb-2">The Beginning</span>
+                <h4 class="text-2xl font-bold mb-2">2021 / 啟程</h4>
+                <p class="text-xs text-gray-400">那时候球衣還很大，球跑得比他還快。</p>
+            </div>
+        </div>
+
+        <!-- 數據指標 (文字區塊) -->
+        <div class="bento-item md:col-span-2 md:row-span-2 bg-blue-600 p-8 flex flex-col justify-between">
+            <div>
+                <h5 class="heading-font text-4xl leading-none mb-6">SKILLS<br>METER.</h5>
+                <div class="space-y-4">
+                    <div class="text-[10px] uppercase tracking-tighter opacity-70">Speed</div>
+                    <div class="w-full bg-blue-800 h-1 rounded-full"><div class="bg-white w-[85%] h-1 rounded-full"></div></div>
+                    <div class="text-[10px] uppercase tracking-tighter opacity-70">Focus</div>
+                    <div class="w-full bg-blue-800 h-1 rounded-full"><div class="bg-white w-[92%] h-1 rounded-full"></div></div>
+                </div>
+            </div>
+            <div class="text-xs opacity-60 italic">持續進化中...</div>
+        </div>
+
+        <!-- 感性文字區 (黑底白字) -->
+        <div class="bento-item md:col-span-2 md:row-span-2 bg-zinc-900 p-8 flex flex-col justify-center border-l-4 border-blue-600">
+            <p class="serif-italic text-2xl text-white mb-6 leading-tight">
+                "足球教給我的，不只是贏球，而是如何面對挫折。"
+            </p>
+            <p class="text-gray-500 text-xs tracking-widest uppercase">—— 比賽日誌 / 2024.03</p>
+        </div>
+
+        <!-- 比賽影片預覽 -->
+        <div class="bento-item md:col-span-4 md:row-span-2 bg-slate-900">
+            <img src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=800&q=80" alt="影片預覽" class="w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <div class="w-20 h-20 rounded-full border border-white/20 flex items-center justify-center mb-4 group-hover:scale-110 transition duration-500">
+                    <i class="fas fa-play text-2xl text-white"></i>
+                </div>
+                <span class="heading-font tracking-widest">Watch High-Light</span>
+            </div>
+        </div>
+
+        <!-- 精彩瞬間 A (直圖) -->
+        <div class="bento-item md:col-span-3 md:row-span-3 bg-gray-800">
+            <img src="https://images.unsplash.com/photo-1518604666860-9ed391f76460?auto=format&fit=crop&w=800&h=1200" alt="直式照片" class="w-full h-full object-cover">
+            <div class="absolute bottom-6 left-6 right-6">
+                <div class="bg-black/50 backdrop-blur-md p-4 rounded-xl">
+                    <span class="text-[10px] text-blue-400 font-bold uppercase block mb-1">Grade 1 Season</span>
+                    <p class="text-sm font-medium leading-relaxed">第一場正式校外比賽的專注瞬間。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 精彩瞬間 B (橫圖) -->
+        <div class="bento-item md:col-span-5 md:row-span-2 bg-gray-800">
+            <img src="https://images.unsplash.com/photo-1516567727245-ad8c68f3ec93?auto=format&fit=crop&w=1200&h=600" alt="橫式照片" class="w-full h-full object-cover">
+            <div class="absolute top-6 right-6 flex flex-col items-end">
+                <span class="heading-font text-5xl opacity-20">TEAMWORK</span>
+            </div>
+        </div>
+
+        <!-- 裝備/細節展示 -->
+        <div class="bento-item md:col-span-2 md:row-span-1 bg-white p-6 flex flex-col justify-center items-center text-zinc-900">
+            <i class="fas fa-award text-3xl mb-2 text-blue-600"></i>
+            <span class="text-xs font-black uppercase tracking-tighter">MVP Moments</span>
+        </div>
+
+        <!-- 未來宣告 -->
+        <div class="bento-item md:col-span-3 md:row-span-1 bg-gradient-to-r from-blue-900 to-indigo-900 p-8 flex items-center justify-between">
+            <div>
+                <p class="text-[10px] text-blue-300 font-bold uppercase">Next Up</p>
+                <h4 class="text-xl font-bold">小三校隊甄選</h4>
+            </div>
+            <i class="fas fa-arrow-right text-blue-300"></i>
+        </div>
+
+    </main>
+
+    <!-- 雜誌底部資訊 -->
+    <footer class="max-w-7xl mx-auto mt-24 pt-12 pb-24 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 px-6">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-white text-black font-black flex items-center justify-center rounded-lg heading-font text-xl shadow-lg shadow-white/10">SB</div>
+            <div>
+                <p class="text-white font-bold text-sm uppercase tracking-widest">Soccer Boy Journeys</p>
+                <p class="text-gray-500 text-[10px]">Produced by Dad & Mom with Love</p>
+            </div>
+        </div>
+        <div class="text-center md:text-right">
+            <p class="text-gray-500 text-[10px] leading-relaxed max-w-xs">
+                此刊物記錄了一個夢想的開端，所有的照片與影片均為真實成長紀錄，版權所有，翻印必究。
+            </p>
+        </div>
+        <div class="text-gray-400 text-[10px] tracking-widest uppercase">
+            EST. 2021 — 2024
+        </div>
+    </footer>
+
+    <!-- 底部懸浮選單 -->
+    <nav class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-white/5 backdrop-blur-2xl border border-white/10 px-8 py-4 rounded-full flex gap-12 z-50 shadow-2xl">
+        <a href="#" class="text-blue-500 text-[10px] font-black uppercase tracking-[0.2em] hover:text-white transition">Home</a>
+        <a href="#" class="text-gray-400 text-[10px] font-black uppercase tracking-[0.2em] hover:text-white transition">Archive</a>
+        <a href="#" class="text-gray-400 text-[10px] font-black uppercase tracking-[0.2em] hover:text-white transition">About</a>
+        <a href="#" class="text-gray-400 text-[10px] font-black uppercase tracking-[0.2em] hover:text-white transition">Stats</a>
+    </nav>
+
+</body>
+</html>
